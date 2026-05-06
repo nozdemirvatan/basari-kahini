@@ -17,15 +17,16 @@ def veri_kaydet(df):
 
 st.set_page_config(page_title="Başarı Kahini", page_icon="🔮")
 
-# --- GİZLİ YÖNETİCİ MENÜSÜ (Sadece verileri indirmek için) ---
-with st.sidebar:
-    st.markdown("### 📊 Yönetici Paneli")
-    st.write("Sergi sonunda toplanan verileri buradan indirebilirsiniz.")
-    if os.path.exists(CSV_FILE):
-        with open(CSV_FILE, "rb") as file:
-            st.download_button(label="📥 Tüm Verileri İndir", data=file, file_name="kahin_verileri.csv", mime="text/csv", use_container_width=True)
-    else:
-        st.warning("Henüz veri toplanmadı.")
+# --- HAYALET YÖNETİCİ MENÜSÜ (URL'ye /?admin=fsm yazılırsa açılır) ---
+if "admin" in st.query_params and st.query_params["admin"] == "fsm":
+    with st.sidebar:
+        st.success("🕵️‍♂️ Yönetici Modu Aktif!")
+        st.write("Hoş geldiniz. Toplanan verileri aşağıdan indirebilirsiniz.")
+        if os.path.exists(CSV_FILE):
+            with open(CSV_FILE, "rb") as file:
+                st.download_button(label="📥 Tüm Verileri İndir", data=file, file_name="kahin_verileri.csv", mime="text/csv", use_container_width=True)
+        else:
+            st.warning("Henüz veri toplanmadı.")
 
 # Sayfalar arası geçiş
 if 'asama' not in st.session_state:
@@ -53,12 +54,11 @@ if st.session_state.asama == 1:
 
 # --- 2. EKRAN: VERİ GİRİŞİ VE SONUÇ ---
 elif st.session_state.asama == 2:
-    st.title("🔮 Hazır mısın ? ")
+    st.title("🔮 Hazır mısın?")
     st.markdown("*Not: Burada girdiğin veriler, bölümümüzün bir sonraki **Makine Öğrenmesi (AI)** modelini eğitmek için anonim olarak kullanılacaktır.*")
     
     st.subheader("O dersle ilgili durumun nedir?")
     
-    # Elle giriş yapılması için düzeltilen Vize inputu
     vize = st.number_input("Aklındaki o dersin Vize Notu (0-100)", min_value=0, max_value=100, value=None, placeholder="Buraya tıkla ve notunu klavyeden yaz...", step=1)
     
     saat = st.slider("Haftalık Genel Çalışma Saatin", min_value=0, max_value=40, value=5)
