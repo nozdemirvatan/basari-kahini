@@ -87,3 +87,9 @@ elif st.session_state.asama == 2:
             st.balloons()
         else:
             st.error("Kahin diyor ki: RİSKLİ BÖLGE! Durum kritik, acilen kahveyi artırıp en ön sıraya geçmen lazım!")
+            # Veri indirme butonu
+        st.write("")
+        st.divider()
+        if os.path.exists(CSV_FILE):
+            with open(CSV_FILE, "rb") as file:
+                st.download_button(label="📥 Toplanan Verileri İndir", data=file, file_name="kahin_verileri.csv", mime="text/csv")
