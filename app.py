@@ -40,7 +40,7 @@ if st.session_state.asama == 1:
     st.title("🔮 Başarı Kahini'ne Hoş Geldin")
     st.write("")
     st.markdown("### 🧠 Şimdi aklından seni en çok zorlayan o dersi tut...")
-    st.write("Dersi aklında tuttuğunda aşağıdaki butona bas, sana o dersten geçip geçemeyeceğini söyleyeceğim!")
+    st.write("Ve aşağıdaki butona bas, sana o dersten geçip geçemeyeceğini söyleyeceğim!")
     st.write("")
     
     col1, col2, col3 = st.columns([1,2,1])
